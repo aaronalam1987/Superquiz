@@ -7,6 +7,7 @@ int welcome = 0; //Set welcome to 0 to display welcome message.
 int questionNum = 0; //Define question number.
 int totalQuestions = 10; //Set question amount.
 int score = 0; //Keep score.
+int answer = 0;
 
 void setup() {
 //Define button pins.
@@ -71,39 +72,21 @@ void doAnswer(int a){
                             questionNum++; //Move to next question.
 }
 
-//Similar to answerCorrect function but with different prints and without incrementing score.
-
-
-//Question struct.
-struct Question {
-const String line1; 
-const String line2;
-const String line3;
-const String line4;
-const String line5;
-const String line6;
-const String line7;
-const String line8;
-const int ANS; 
-};
-
 const char * const welcomeMess[9] PROGMEM = { "Welcome to", "Superquiz", "press any button", "to continue.", "Ready", "to", "play", "?", 1 };
 const char * const gameEnd[3] PROGMEM = { "Game Over", "Your score is:", 1 };
-const char * const Q1[9] PROGMEM = { "How many", "seasons of", "Friends", "where there?", "1", "4", "6", "9", 4 };
-const char * const Q2[9] PROGMEM = { "Who pees on", "Monica", "after she is", "stung by a jelly fish?", "Chandler", "Rachel", "Joey", "Pheobe", 3 };
+const char * const Q1[9] PROGMEM = { "How many", "seasons of", "Friends", "where there?", "1", "4", "6", "10", 4 };
+const char * const Q2[9] PROGMEM = { "Who pees on", "Monica after", "she is stung", "by a jelly fish?", "Chandler", "Rachel", "Joey", "Pheobe", 3 };
 const char * const Q3[9] PROGMEM = { "Ross says whos", "name at the altar", "in london?", "", "Rachel", "Pheobe", "Monica", "Emily", 1 };
 const char * const Q4[9] PROGMEM = { "How many sisters", "does joey have?", "", "", "5", "7", "2", "0", 2 };
-const char * const Q5[9] PROGMEM = { "What is the name of", "Joeys character in", "the commercial for", "opening milk cartons?", "Mike", "Tommy", "Kevin", "Drake", 3 };
-const char * const Q6[9] PROGMEM = { "What instrument did", "  Ross intend to play", "at Moncica and", "Chandlers Wedding?", "Keyboard", "Drums", "Guitar", "Sax", 1 };
-const char * const Q7[9] PROGMEM = { "What is Chandlers", "middle name?", "", "", "Nora", "Muiel", "Charles", "Francis", 2 };
+const char * const Q5[9] PROGMEM = { "What is the name of", "Joeys character in", "the commercial for", "opening milk carton", "Mike", "Tommy", "Kevin", "Drake", 3 };
+const char * const Q6[9] PROGMEM = { "What instrument did", "Ross intend to play", "at Monica and", "Chandlers Wedding?", "Bagpipe", "Drums", "Guitar", "Sax", 1 };
+const char * const Q7[9] PROGMEM = { "What is Chandlers", "middle name?", "", "", "Nora", "Muriel", "Charles", "Francis", 2 };
 const char * const Q8[9] PROGMEM = { "Who was", "Monicas first kiss?", "", "", "Chandler", "Pete", "Ross", "Richard", 3 };
-const char * const Q9[9] PROGMEM = { "Chick Jr. and Duck Jr.", "get stuck in what?", "", "", "Toilet", "Foosball", "Bin", "Fridge", 2 }; 
-const char * const Q10[9] PROGMEM = { "Which famous character", "famously said", "PIVOT?", "", "Rachel", "Joey", "Monica", "Ross", 4 };
+const char * const Q9[9] PROGMEM = { "Chick Jr and Duck Jr", "get stuck in what?", "", "", "Toilet", "Foosball", "Bin", "Fridge", 2 }; 
+const char * const Q10[9] PROGMEM = { "Who", "famously said", "PIVOT?", "", "Rachel", "Joey", "Monica", "Ross", 4 };
 
 void doButtons(){
-switch (questionNum){
-  case 0:
-  if(buttonPressed > 0){ //If any button pressed.
+  if(buttonPressed > 0 & welcome==0){ //If any button pressed.
       welcome=1; //Set welcome to 1 to show we have passed this stage.
       questionNum++; //Set first question
       lcd.clear(); //Clear lcd one.
@@ -111,100 +94,17 @@ switch (questionNum){
       buttonPressed=0; //Reset button press.
       delay(1000); //Delay for one second.
   }
-  case 1: 
+ else{
   if(buttonPressed > 0){ //As we reset button to 0, make sure it is more than 0.
-        if(buttonPressed==Q1[8]){ 
+        if(buttonPressed==answer){ 
             doAnswer(1); //Call answerCorrect function.  
         }
         else{
            doAnswer(0);        
         }
   }
-  case 2:
-  if(buttonPressed > 0){
-        if(buttonPressed==Q2[8]){
-            doAnswer(1);       
-        }
-        else{
-           doAnswer(0);
-        }
-  }
-  case 3:
-  if(buttonPressed > 0){
-        if(buttonPressed==Q3[8]){
-            doAnswer(1); 
-        }
-        else{
-           doAnswer(0);
-        }
-  }
-  case 4:
-  if(buttonPressed > 0){
-        if(buttonPressed==Q4[8]){
-            doAnswer(1); 
-        }
-        else{
-           doAnswer(0);
-        }
-  }
-  case 5:
-  if(buttonPressed > 0){
-        if(buttonPressed==Q5[8]){
-            doAnswer(1); 
-        }
-        else{
-           doAnswer(0);
-        }
-  }
-  case 6:
-  if(buttonPressed > 0){
-        if(buttonPressed==Q6[8]){
-            doAnswer(1); 
-        }
-        else{
-           doAnswer(0);
-        }
-  }
-  case 7:
-  if(buttonPressed > 0){
-        if(buttonPressed==Q7[8]){
-            doAnswer(1); 
-        }
-        else{
-           doAnswer(0);
-        }
-  }
-  case 8:
-  if(buttonPressed > 0){
-        if(buttonPressed==Q8[8]){
-            doAnswer(1); 
-        }
-        else{
-           doAnswer(0);
-        }
-  }
-  case 9:
-  if(buttonPressed > 0){
-        if(buttonPressed==Q9[8]){
-            doAnswer(1); 
-        }
-        else{
-           doAnswer(0);
-        }
-  }
-  case 10:
-  if(buttonPressed > 0){
-        if(buttonPressed==Q10[8]){
-            doAnswer(1); 
-        }
-        else{
-           doAnswer(0);
-        }
-  }
+ }
   
-}
-
-
 }
 
 void loop() {
@@ -218,42 +118,52 @@ void loop() {
     }
     if(questionNum==1){ //Check which question is active and display it.
       doDisplay(Q1[0], Q1[1], Q1[2], Q1[3], Q1[4], Q1[5], Q1[6], Q1[7]);
+      answer = Q1[8];
       doButtons();
     }
     if(questionNum==2){
       doDisplay(Q2[0], Q2[1], Q2[2], Q2[3], Q2[4], Q2[5], Q2[6], Q2[7]);
+      answer = Q2[8];
       doButtons();
     }
     if(questionNum==3){
       doDisplay(Q3[0], Q3[1], Q3[2], Q3[3], Q3[4], Q3[5], Q3[6], Q3[7]);
+      answer = Q3[8];
       doButtons();
     }
     if(questionNum==4){
       doDisplay(Q4[0], Q4[1], Q4[2], Q4[3], Q4[4], Q4[5], Q4[6], Q4[7]);
+      answer = Q4[8];
       doButtons();
     }
     if(questionNum==5){
       doDisplay(Q5[0], Q5[1], Q5[2], Q5[3], Q5[4], Q5[5], Q5[6], Q5[7]);
+      answer = Q5[8];
       doButtons();
     }
     if(questionNum==6){
       doDisplay(Q6[0], Q6[1], Q6[2], Q6[3], Q6[4], Q6[5], Q6[6], Q6[7]);
+      answer = Q6[8];
       doButtons();
     }
     if(questionNum==7){
       doDisplay(Q7[0], Q7[1], Q7[2], Q7[3], Q7[4], Q7[5], Q7[6], Q7[7]);
+      answer = Q7[8];
       doButtons();
     }
     if(questionNum==8){
       doDisplay(Q8[0], Q8[1], Q8[2], Q8[3], Q8[4], Q8[5], Q8[6], Q8[7]);
+      answer = Q8[8];
       doButtons();
     }
     if(questionNum==9){
       doDisplay(Q9[0], Q9[1], Q9[2], Q9[3], Q9[4], Q9[5], Q9[6], Q9[7]);
+      answer = Q9[8];
       doButtons();
     }
     if(questionNum==10){
       doDisplay(Q10[0], Q10[1], Q10[2], Q10[3], Q10[4], Q10[5], Q10[6], Q10[7]);
+      answer = Q10[8];
       doButtons();
     }
   }
