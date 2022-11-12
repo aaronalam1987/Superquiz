@@ -35,7 +35,7 @@ void setup() {
 const char * const Question[12][6]= {
 {"Welcome to Superquiz! Press any button to continue.", "Ready", "to", "play", "?", 1 },
 { "Game Over", "Your score is:", 1 },
-{ "How many seasons of Friends where there?", "1", "4", "6", "10", 4 },
+{ "How many seasons of Friends were there?", "1", "4", "6", "10", 4 },
 { "Who pees on Monica after she is stung by a jelly fish?", "Chandler", "Rachel", "Joey", "Pheobe", 3 },
 { "Ross says whos name at the altar in london?", "Rachel", "Pheobe", "Monica", "Emily", 1 },
 { "How many sisters does joey have?", "5", "7", "2", "0", 2 },
@@ -149,6 +149,7 @@ void doEnd(){
       welcome = 0; 
       questionNum = 0;
       buttonPressed = 0;
+      score = 0;
         lcd.clear();
           lcd2.clear();
       doDisplay(0);
@@ -173,7 +174,7 @@ void doAnswer(int a){
               lcd2.setCursor(0,1); //Set second row on lcd two.
               lcd2.print("Coming up"); //Print on lcd two.
               buttonPressed=0; //Reset stored button press value.
-              
+
               delay(3000); //Delay 3 seconds so user can read screen.
               lcd.clear(); //Clear lcd one.
               lcd2.clear(); //Clear lcd two.
