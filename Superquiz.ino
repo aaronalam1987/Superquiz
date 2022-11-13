@@ -33,18 +33,18 @@ void setup() {
 
 //Question structure - Question, answer one, answer two, answer three, answer four, correct answer button.
 const char * const Question[12][6]= {
-{"Welcome to Superquiz! Press any button to continue.", "Ready", "to", "play", "?", 1 },
-{ "Game Over", "Your score is:", 1 },
-{ "How many seasons of Friends were there?", "1", "4", "6", "10", 4 },
-{ "Who pees on Monica after she is stung by a jelly fish?", "Chandler", "Rachel", "Joey", "Pheobe", 3 },
-{ "Ross says whos name at the altar in london?", "Rachel", "Pheobe", "Monica", "Emily", 1 },
-{ "How many sisters does joey have?", "5", "7", "2", "0", 2 },
-{ "What is the name of Joeys character in the commercial for opening milk carton", "Mike", "Tommy", "Kevin", "Drake", 3 },
-{ "What instrument did Ross intend to play at Monica and Chandlers Wedding?", "Bagpipe", "Drums", "Guitar", "Sax", 1 },
-{ "What is Chandlers middle name?", "Nora", "Muriel", "Charles", "Francis", 2 },
-{ "Who was Monicas first kiss?", "Chandler", "Pete", "Ross", "Richard", 3 },
-{ "Chick Jr and Duck Jr get stuck in what?", "Toilet", "Foosball", "Bin", "Fridge", 2 },
-{ "Who famously said PIVOT?", "Rachel", "Joey", "Monica", "Ross", 4 }
+{"Welcome to Superquiz! Press any button to continue.", "Ready", "to", "play", "?", "1" },
+{ "Game Over", "Your score is:", "1" },
+{ "How many seasons of Friends were there?", "1", "4", "6", "10", "4" },
+{ "Who pees on Monica after she is stung by a jelly fish?", "Chandler", "Rachel", "Joey", "Pheobe", "3" },
+{ "Ross says whos name at the altar in london?", "Rachel", "Pheobe", "Monica", "Emily", "1" },
+{ "How many sisters does joey have?", "5", "7", "2", "0", "2" },
+{ "What is the name of Joeys character in the commercial for opening milk carton", "Mike", "Tommy", "Kevin", "Drake", "3" },
+{ "What instrument did Ross intend to play at Monica and Chandlers Wedding?", "Bagpipe", "Drums", "Guitar", "Sax", "1" },
+{ "What is Chandlers middle name?", "Nora", "Muriel", "Charles", "Francis", "2" },
+{ "Who was Monicas first kiss?", "Chandler", "Pete", "Ross", "Richard", "3" },
+{ "Chick Jr and Duck Jr get stuck in what?", "Toilet", "Foosball", "Bin", "Fridge", "2" },
+{ "Who famously said PIVOT?", "Rachel", "Joey", "Monica", "Ross", "4" }
 };
 
 //Function for displaying on lcds.
@@ -57,9 +57,9 @@ void doDisplay(int Q){
 //Split question string between total lines and print on appropriate line.
   int stringStart = 0;
   int stringEnd = 20;
-  int lcdLine = 0;
+  
 
-  for(lcdLine; lcdLine <= 3; lcdLine++){
+  for(int lcdLine = 0; lcdLine <= 3; lcdLine++){
     String displayString = mainLCD.substring(stringStart, stringEnd);//Create substring from main string within 20 chars.
           lcd.setCursor(0,lcdLine); //Set lcd line to required line.
           lcd.print(displayString); //Print 20 char substring.
@@ -219,8 +219,9 @@ void loop() {
       while(doQuestion){ //While do question is true.
         int showQuestion = questionNum +2; //showQuestion is question + 2 for game messages.
         doDisplay(showQuestion); //Display the question.
-          answer = Question[showQuestion][5]; //Define the answer.
+            answer = atoi(Question[showQuestion][5]); //Define the answer.
           doQuestion=false; //doQuestion is false because question is displayed.
+          
           
     }
   }
